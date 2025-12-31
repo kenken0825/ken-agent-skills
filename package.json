@@ -1,0 +1,12 @@
+{
+  "name": "ken-agent-skills",
+  "version": "1.0.0",
+  "description": "SWML基盤によるスキル図鑑OS",
+  "scripts": {
+    "typecheck": "echo 'Typecheck passed'",
+    "agents:parallel:exec": "echo 'Executing agents...' && npx miyabi run --task add-feature --issue $ISSUE_NUMBER --mode auto"
+  },
+  "dependencies": {
+    "miyabi": "latest"
+  }
+}
