@@ -1,0 +1,13 @@
+# Monthly budget configuration for economic circuit breaker
+monthly_budget_usd: 500
+thresholds:
+  warning: 0.8      # 80% of budget
+  emergency: 1.5    # 150% of budget
+emergency_actions:
+  disable_workflows:
+    - autonomous-agent.yml
+    - continuous-improvement.yml
+    - agent-onboarding.yml
+  notify_channels:
+    - email
+    - slack

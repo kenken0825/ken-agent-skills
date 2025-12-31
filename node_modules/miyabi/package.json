@@ -1,0 +1,84 @@
+{
+  "name": "miyabi",
+  "version": "0.19.0",
+  "description": "Miyabi - Beauty in Autonomous Development. Complete autonomous AI development platform with GitHub OS integration. Optimized for AI coding agents (Claude Code).",
+  "type": "module",
+  "bin": {
+    "miyabi": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "templates",
+    "scripts/postinstall.js",
+    ".claude",
+    "CLAUDE.md",
+    "AI_AGENT_USAGE.md",
+    "README.md",
+    "SETUP_GUIDE.md",
+    "FOR_NON_PROGRAMMERS.md",
+    "INSTALL_TO_EXISTING_PROJECT.md"
+  ],
+  "scripts": {
+    "build": "tsc && node scripts/fix-esm-imports.js && node scripts/post-build.js",
+    "dev": "tsx src/index.ts",
+    "clean": "rm -rf dist tsconfig.tsbuildinfo",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "postinstall": "node scripts/postinstall.js",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "keywords": [
+    "ai",
+    "agents",
+    "autonomous",
+    "automation",
+    "cli",
+    "github",
+    "automation",
+    "workflow",
+    "devops",
+    "claude",
+    "anthropic"
+  ],
+  "author": "Shunsuke Hayashi <supernovasyun@gmail.com>",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/ShunsukeHayashi/Miyabi#readme",
+  "bugs": {
+    "url": "https://github.com/ShunsukeHayashi/Miyabi/issues"
+  },
+  "dependencies": {
+    "@octokit/rest": "^21.1.1",
+    "@octokit/graphql": "^8.2.1",
+    "chalk": "^5.3.0",
+    "cli-table3": "^0.6.5",
+    "commander": "^11.1.0",
+    "inquirer": "^9.2.12",
+    "ora": "^9.0.0",
+    "open": "^10.0.3",
+    "dotenv": "^16.6.1",
+    "yaml": "^2.3.4",
+    "miyabi-agent-sdk": "^0.1.0-alpha.2"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.7",
+    "@types/node": "^22.15.0",
+    "@vitest/coverage-v8": "^3.2.4",
+    "tsx": "^4.7.0",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ShunsukeHayashi/Miyabi.git",
+    "directory": "packages/cli"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

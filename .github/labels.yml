@@ -1,0 +1,45 @@
+# Label definitions for label-sync action
+labels:
+  # Type labels
+  - name: "type:bug"
+    color: "d73a4a"
+    description: "Something isn't working"
+  
+  - name: "type:feature"
+    color: "0e8a16"
+    description: "New feature or request"
+  
+  - name: "type:docs"
+    color: "0075ca"
+    description: "Documentation improvements"
+  
+  # Priority labels
+  - name: "priority:P0-Critical"
+    color: "b60205"
+    description: "Critical issue that needs immediate attention"
+  
+  - name: "priority:P1-High"
+    color: "d93f0b"
+    description: "High priority issue"
+  
+  # State labels
+  - name: "state:pending"
+    color: "fbca04"
+    description: "Issue is pending triage"
+  
+  - name: "state:analyzing"
+    color: "1d76db"
+    description: "Issue is being analyzed"
+  
+  - name: "state:implementing"
+    color: "5319e7"
+    description: "Issue is being implemented"
+  
+  # Agent labels
+  - name: "🤖agent-execute"
+    color: "7057ff"
+    description: "Execute autonomous agent on this issue"
+  
+  - name: "agent:coordinator"
+    color: "c5def5"
+    description: "Coordinator agent is working"
