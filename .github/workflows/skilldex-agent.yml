@@ -1,0 +1,217 @@
+name: Skilldex Orchestrator Agent
+
+on:
+  issues:
+    types: [labeled, opened]
+  issue_comment:
+    types: [created]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: 'Issue number to work on'
+        required: true
+        type: number
+
+jobs:
+  check-and-execute:
+    runs-on: ubuntu-latest
+    if: |
+      (github.event_name == 'workflow_dispatch') ||
+      (github.event_name == 'issues' && (
+        contains(github.event.label.name, 'agent:issue') ||
+        contains(github.event.label.name, 'agent:coordinator')
+      )) ||
+      (github.event_name == 'issue_comment' && 
+       github.event.issue.pull_request == null && 
+       contains(github.event.comment.body, '/skilldex'))
+    
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: |
+          npm ci
+          npm install -g tsx
+          
+      - name: Extract issue number
+        id: issue
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "number=${{ inputs.issue_number }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "number=${{ github.event.issue.number }}" >> "$GITHUB_OUTPUT"
+          fi
+          
+      - name: Get issue details
+        id: issue_details
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ISSUE_DATA=$(gh api repos/${{ github.repository }}/issues/${{ steps.issue.outputs.number }})
+          ISSUE_TITLE=$(echo "$ISSUE_DATA" | jq -r '.title')
+          ISSUE_BODY=$(echo "$ISSUE_DATA" | jq -r '.body')
+          
+          echo "title=$ISSUE_TITLE" >> "$GITHUB_OUTPUT"
+          echo "body<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$ISSUE_BODY" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+          
+      - name: Determine agent type
+        id: agent_type
+        run: |
+          TITLE="${{ steps.issue_details.outputs.title }}"
+          
+          if [[ "$TITLE" == *"Win Point Hunter"* ]]; then
+            echo "type=win-point-hunter" >> "$GITHUB_OUTPUT"
+            echo "path=agents/win-point-hunter" >> "$GITHUB_OUTPUT"
+          elif [[ "$TITLE" == *"Pain Abstractor"* ]]; then
+            echo "type=pain-abstractor" >> "$GITHUB_OUTPUT"
+            echo "path=agents/pain-abstractor" >> "$GITHUB_OUTPUT"
+          elif [[ "$TITLE" == *"Skill Recommender"* ]]; then
+            echo "type=skill-recommender" >> "$GITHUB_OUTPUT"
+            echo "path=agents/skill-recommender" >> "$GITHUB_OUTPUT"
+          elif [[ "$TITLE" == *"Skill Evolution Judge"* ]]; then
+            echo "type=skill-evolution-judge" >> "$GITHUB_OUTPUT"
+            echo "path=agents/skill-evolution-judge" >> "$GITHUB_OUTPUT"
+          elif [[ "$TITLE" == *"GitHub Packager"* ]]; then
+            echo "type=github-packager" >> "$GITHUB_OUTPUT"
+            echo "path=agents/github-packager" >> "$GITHUB_OUTPUT"
+          elif [[ "$TITLE" == *"Orchestrator Core"* ]]; then
+            echo "type=orchestrator" >> "$GITHUB_OUTPUT"
+            echo "path=orchestrator" >> "$GITHUB_OUTPUT"
+          else
+            echo "type=unknown" >> "$GITHUB_OUTPUT"
+            echo "path=unknown" >> "$GITHUB_OUTPUT"
+          fi
+          
+      - name: Create implementation plan
+        if: steps.agent_type.outputs.type != 'unknown'
+        run: |
+          mkdir -p ${{ steps.agent_type.outputs.path }}
+          
+          # Create basic structure based on agent type
+          case "${{ steps.agent_type.outputs.type }}" in
+            "win-point-hunter")
+              echo "Creating Win Point Hunter implementation..."
+              ;;
+            "pain-abstractor")
+              echo "Creating Pain Abstractor implementation..."
+              ;;
+            "skill-recommender")
+              echo "Creating Skill Recommender implementation..."
+              ;;
+            "skill-evolution-judge")
+              echo "Creating Skill Evolution Judge implementation..."
+              ;;
+            "github-packager")
+              echo "Creating GitHub Packager implementation..."
+              ;;
+            "orchestrator")
+              echo "Creating Orchestrator Core implementation..."
+              ;;
+          esac
+          
+      - name: Generate implementation
+        if: steps.agent_type.outputs.type != 'unknown'
+        run: |
+          # This is where Miyabi or other AI agent would generate code
+          # For now, create placeholder files
+          
+          AGENT_PATH="${{ steps.agent_type.outputs.path }}"
+          
+          # Create index.ts if not exists
+          if [ ! -f "$AGENT_PATH/index.ts" ]; then
+            cat > "$AGENT_PATH/index.ts" << 'EOF'
+          // Auto-generated by Skilldex Orchestrator Agent
+          // Issue: #${{ steps.issue.outputs.number }}
+          
+          export class Agent {
+            constructor() {
+              console.log('Agent initialized');
+            }
+            
+            async execute() {
+              // TODO: Implement agent logic
+              return { status: 'success' };
+            }
+          }
+          EOF
+          fi
+          
+      - name: Create branch and commit
+        if: steps.agent_type.outputs.type != 'unknown'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BRANCH_NAME="agent/issue-${{ steps.issue.outputs.number }}"
+          
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git checkout -b "$BRANCH_NAME"
+          git add .
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "feat: implement ${{ steps.agent_type.outputs.type }} for #${{ steps.issue.outputs.number }}
+
+            Auto-generated implementation based on issue requirements.
+            
+            Co-authored-by: Skilldex Orchestrator <bot@skilldex.ai>"
+            
+            git push origin "$BRANCH_NAME"
+            
+            # Create pull request
+            gh pr create \
+              --title "Implementation: ${{ steps.issue_details.outputs.title }}" \
+              --body "## 🤖 Auto-generated Implementation
+
+              Implements requirements from #${{ steps.issue.outputs.number }}
+              
+              ### Changes
+              - Basic structure for ${{ steps.agent_type.outputs.type }}
+              - Placeholder implementation
+              
+              ### Next Steps
+              - [ ] Review generated code
+              - [ ] Add tests
+              - [ ] Complete TODO items
+              
+              Closes #${{ steps.issue.outputs.number }}" \
+              --base main \
+              --head "$BRANCH_NAME" \
+              --label "🤖 agent:pr" \
+              --assignee "${{ github.actor }}"
+          fi
+          
+      - name: Update issue status
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          STATUS_MESSAGE="🤖 Skilldex Orchestrator Agent has processed this issue."
+          
+          if [ "${{ steps.agent_type.outputs.type }}" == "unknown" ]; then
+            STATUS_MESSAGE="$STATUS_MESSAGE\n\n⚠️ Could not determine agent type from issue title."
+          else
+            STATUS_MESSAGE="$STATUS_MESSAGE\n\n✅ Implementation started for ${{ steps.agent_type.outputs.type }}"
+          fi
+          
+          gh issue comment ${{ steps.issue.outputs.number }} \
+            --repo ${{ github.repository }} \
+            --body "$STATUS_MESSAGE"
