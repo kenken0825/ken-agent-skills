@@ -4,7 +4,7 @@
   "description": "SWML基盤によるスキル図鑑OS",
   "scripts": {
     "typecheck": "echo 'Typecheck passed'",
-    "agents:parallel:exec": "echo 'Executing agents...' && npx miyabi run --task add-feature --issue $ISSUE_NUMBER --mode auto",
+    "agents:parallel:exec": "npx miyabi run --task $TASK_TYPE --issue $ISSUE_NUMBER --mode auto",
     "report:weekly:issue": "echo 'Weekly report generation not implemented'",
     "state:transition": "echo 'State transition not implemented'"
   },

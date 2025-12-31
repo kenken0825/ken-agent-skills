@@ -108,10 +108,9 @@ jobs:
       - name: Execute agents
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           echo "Executing agents for issue #${{ env.ISSUE_NUMBER }}"
-          # Use Miyabi directly instead of npm script for better error handling
+          # Execute Miyabi without ANTHROPIC_API_KEY
           npx miyabi run \
             --task ${{ env.TASK_TYPE }} \
             --issue ${{ env.ISSUE_NUMBER }} \
