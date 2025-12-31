@@ -1,0 +1,66 @@
+{
+  "id": "company-001",
+  "name": "株式会社テクノソリューション",
+  "industry": "IT",
+  "size": "medium",
+  "employeeCount": 150,
+  "founded": "2010-04-01",
+  "location": {
+    "prefecture": "東京都",
+    "city": "渋谷区"
+  },
+  "businessOverview": "企業向けのクラウドソリューションとデジタルトランスフォーメーションサービスを提供。特に中小企業向けのERPシステム導入とカスタマイズに強み。",
+  "challenges": [
+    {
+      "category": "人材管理",
+      "description": "エンジニアの採用競争激化により、優秀な人材の確保が困難",
+      "priority": "high",
+      "impact": "事業拡大の障壁"
+    },
+    {
+      "category": "業務効率",
+      "description": "プロジェクト管理ツールが複数存在し、情報の一元化ができていない",
+      "priority": "medium",
+      "impact": "生産性の低下"
+    },
+    {
+      "category": "顧客管理",
+      "description": "顧客情報とプロジェクト履歴が散在し、営業活動に活用できていない",
+      "priority": "high",
+      "impact": "営業機会の損失"
+    }
+  ],
+  "currentSystems": [
+    {
+      "type": "プロジェクト管理",
+      "tool": "Jira",
+      "satisfaction": 3
+    },
+    {
+      "type": "顧客管理",
+      "tool": "Salesforce",
+      "satisfaction": 2
+    },
+    {
+      "type": "コミュニケーション",
+      "tool": "Slack",
+      "satisfaction": 4
+    }
+  ],
+  "budget": {
+    "annual": "5000万円",
+    "itInvestment": "15%"
+  },
+  "goals": [
+    "2025年度までに売上高を50%増加",
+    "エンジニアの離職率を10%以下に抑制",
+    "顧客満足度を85%以上に向上"
+  ],
+  "contactPerson": {
+    "name": "山田太郎",
+    "position": "CTO",
+    "email": "yamada@techno-solution.jp",
+    "phone": "03-1234-5678"
+  },
+  "lastUpdated": "2024-12-01"
+}

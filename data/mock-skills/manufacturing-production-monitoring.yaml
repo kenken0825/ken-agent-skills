@@ -1,0 +1,37 @@
+id: mfg-prod-001
+name: Production Line Monitoring
+description: Automated monitoring and alerting system for production line efficiency and equipment status
+industry: manufacturing
+category: production
+evolution_level: 2
+complexity: medium
+prerequisites:
+  - Basic manufacturing process understanding
+  - Access to production line sensors
+  - Data visualization tools
+implementation:
+  estimated_hours: 40
+  technologies:
+    - IoT sensors
+    - Real-time dashboards
+    - Alert systems
+  integration_points:
+    - ERP system
+    - MES (Manufacturing Execution System)
+    - Email/SMS notification services
+benefits:
+  - 30% reduction in unplanned downtime
+  - Real-time visibility into production metrics
+  - Automated alerts for maintenance needs
+metrics:
+  - OEE (Overall Equipment Effectiveness)
+  - Downtime reduction percentage
+  - Response time to issues
+tags:
+  - automation
+  - monitoring
+  - real-time
+  - IoT
+status: active
+created_date: 2024-01-15
+updated_date: 2024-12-01

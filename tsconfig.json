@@ -1,0 +1,114 @@
+{
+  "compilerOptions": {
+    // Language and Environment
+    "target": "ES2022",                                  // Modern JavaScript features for Node.js 18+
+    "lib": ["ES2022"],                                   // Include ES2022 library definitions
+    "module": "commonjs",                                // Node.js module system
+    "moduleResolution": "node",                          // Node.js-style module resolution
+    
+    // Emit Configuration
+    "outDir": "./dist",                                  // Output directory for compiled files
+    "rootDir": "./",                                     // Root directory of source files
+    "declaration": true,                                 // Generate .d.ts files
+    "declarationMap": true,                              // Generate sourcemaps for .d.ts files
+    "sourceMap": true,                                   // Generate sourcemaps for debugging
+    "removeComments": true,                              // Remove comments from output
+    "emitDecoratorMetadata": true,                       // Enable experimental decorator metadata
+    "experimentalDecorators": true,                      // Enable experimental decorators
+    
+    // Type Checking - Strict Mode
+    "strict": true,                                      // Enable all strict type-checking options
+    "noImplicitAny": true,                              // Error on expressions with implicit 'any' type
+    "strictNullChecks": true,                           // Enable strict null checks
+    "strictFunctionTypes": true,                        // Enable strict checking of function types
+    "strictBindCallApply": true,                        // Enable strict 'bind', 'call', and 'apply' methods
+    "strictPropertyInitialization": true,               // Enable strict checking of property initialization
+    "noImplicitThis": true,                             // Error on 'this' expressions with implicit 'any' type
+    "useUnknownInCatchVariables": true,                // Default catch clause variables as 'unknown' instead of 'any'
+    "alwaysStrict": true,                               // Ensure 'use strict' is always emitted
+    
+    // Additional Type Checking
+    "noUnusedLocals": true,                             // Report errors on unused locals
+    "noUnusedParameters": true,                         // Report errors on unused parameters
+    "exactOptionalPropertyTypes": true,                 // Enable exact optional property types
+    "noImplicitReturns": true,                          // Report error when not all code paths return
+    "noFallthroughCasesInSwitch": true,                // Report errors for fallthrough cases in switch
+    "noUncheckedIndexedAccess": true,                   // Add 'undefined' to index signature results
+    "noImplicitOverride": true,                         // Ensure overriding members are marked with 'override'
+    "noPropertyAccessFromIndexSignature": true,         // Require explicit indexing for objects with index signatures
+    
+    // Module Resolution
+    "esModuleInterop": true,                            // Enable interoperability between CommonJS and ES Modules
+    "allowSyntheticDefaultImports": true,               // Allow default imports from modules with no default export
+    "resolveJsonModule": true,                           // Enable importing .json files
+    "isolatedModules": true,                            // Ensure each file can be safely transpiled
+    
+    // Advanced Options
+    "skipLibCheck": true,                                // Skip type checking of declaration files
+    "forceConsistentCasingInFileNames": true,          // Ensure consistent casing in file names
+    "allowJs": true,                                     // Allow JavaScript files to be compiled
+    "checkJs": false,                                    // Disable type checking for .js files
+    
+    // Path Mapping
+    "baseUrl": "./",                                     // Base directory to resolve non-relative module names
+    "paths": {
+      "@/*": ["src/*"],                                  // Map @/ to src/ directory
+      "@agents/*": ["agents/*"],                         // Map @agents/ to agents/ directory
+      "@skills/*": ["skills/*"],                         // Map @skills/ to skills/ directory
+      "@orchestrator/*": ["orchestrator/*"],             // Map @orchestrator/ to orchestrator/ directory
+      "@shared/*": ["shared/*"],                         // Map @shared/ to shared/ directory
+      "@professional-skills/*": ["professional-skills/*"], // Map @professional-skills/ to professional-skills/ directory
+      "@scripts/*": ["scripts/*"],                       // Map @scripts/ to scripts/ directory
+      "@data/*": ["data/*"]                              // Map @data/ to data/ directory
+    },
+    
+    // Type Roots
+    "typeRoots": [
+      "./node_modules/@types",                           // Include @types packages
+      "./shared/types"                                   // Include custom type definitions
+    ]
+  },
+  
+  // Include patterns
+  "include": [
+    "src/**/*",
+    "agents/**/*",
+    "orchestrator/**/*",
+    "skills/**/*",
+    "professional-skills/**/*",
+    "scripts/**/*",
+    "shared/**/*",
+    "tests/**/*"
+  ],
+  
+  // Exclude patterns
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "coverage",
+    "logs",
+    "reports",
+    "**/*.spec.ts",
+    "**/*.test.ts",
+    "**/tests/**",
+    "swml-core/**",                                      // Exclude Rust project
+    "client-skills-pool/**",                             // Exclude if not TypeScript
+    "ken-agent-skills/**"                                // Exclude nested project
+  ],
+  
+  // Project References (if using TypeScript project references)
+  "references": [],
+  
+  // TS Node Configuration (for development with tsx)
+  "ts-node": {
+    "compilerOptions": {
+      "module": "ESNext",                                // Use ESNext modules for ts-node/tsx
+      "target": "ES2022",
+      "allowJs": true,
+      "esModuleInterop": true
+    },
+    "transpileOnly": true,                               // Skip type checking for faster execution
+    "files": true                                        // Load files from tsconfig.json
+  }
+}

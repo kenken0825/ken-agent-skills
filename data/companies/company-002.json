@@ -1,0 +1,66 @@
+{
+  "id": "company-002",
+  "name": "有限会社サクラ製造",
+  "industry": "製造業",
+  "size": "small",
+  "employeeCount": 45,
+  "founded": "1985-07-15",
+  "location": {
+    "prefecture": "愛知県",
+    "city": "豊田市"
+  },
+  "businessOverview": "自動車部品の精密加工を専門とする町工場。大手自動車メーカーの二次サプライヤーとして、高品質な部品を供給。",
+  "challenges": [
+    {
+      "category": "生産管理",
+      "description": "紙ベースの生産管理により、在庫状況のリアルタイム把握が困難",
+      "priority": "critical",
+      "impact": "納期遅延リスク"
+    },
+    {
+      "category": "品質管理",
+      "description": "検査データが手書きで記録され、品質分析に時間がかかる",
+      "priority": "high",
+      "impact": "品質改善の遅れ"
+    },
+    {
+      "category": "技術継承",
+      "description": "ベテラン職人の技術をデジタル化できていない",
+      "priority": "medium",
+      "impact": "技術力の喪失リスク"
+    }
+  ],
+  "currentSystems": [
+    {
+      "type": "会計",
+      "tool": "弥生会計",
+      "satisfaction": 4
+    },
+    {
+      "type": "生産管理",
+      "tool": "Excel + 紙台帳",
+      "satisfaction": 2
+    },
+    {
+      "type": "勤怠管理",
+      "tool": "タイムカード",
+      "satisfaction": 3
+    }
+  ],
+  "budget": {
+    "annual": "800万円",
+    "itInvestment": "5%"
+  },
+  "goals": [
+    "生産性を20%向上させる",
+    "不良品率を現在の2%から1%以下に削減",
+    "若手技術者の育成期間を半減"
+  ],
+  "contactPerson": {
+    "name": "佐藤花子",
+    "position": "代表取締役",
+    "email": "sato@sakura-mfg.co.jp",
+    "phone": "0565-12-3456"
+  },
+  "lastUpdated": "2024-11-28"
+}

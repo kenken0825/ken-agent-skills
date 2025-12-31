@@ -1,0 +1,42 @@
+id: it-rep-004
+name: Automated Monthly Report Generation
+description: Automated collection, analysis, and distribution of monthly business reports across departments
+industry: IT
+category: reporting
+evolution_level: 2
+complexity: low
+prerequisites:
+  - Access to data sources (databases, APIs)
+  - Report templates
+  - Distribution list management
+implementation:
+  estimated_hours: 30
+  technologies:
+    - Python/R
+    - SQL
+    - Power BI/Tableau
+    - Email automation
+    - Scheduled tasks/cron
+  integration_points:
+    - CRM systems
+    - ERP databases
+    - Marketing platforms
+    - Email servers
+benefits:
+  - 90% reduction in report preparation time
+  - Consistent report formatting
+  - Automated insights generation
+  - Scheduled distribution
+metrics:
+  - Report generation time
+  - Data accuracy
+  - Stakeholder satisfaction
+  - Time saved per month
+tags:
+  - reporting
+  - automation
+  - analytics
+  - scheduled_tasks
+status: active
+created_date: 2024-01-05
+updated_date: 2024-12-20

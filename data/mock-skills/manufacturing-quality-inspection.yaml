@@ -1,0 +1,40 @@
+id: mfg-qual-002
+name: AI-Powered Quality Inspection
+description: Computer vision-based automated quality inspection system for manufacturing defect detection
+industry: manufacturing
+category: quality_control
+evolution_level: 4
+complexity: high
+prerequisites:
+  - High-resolution camera systems
+  - ML/AI infrastructure
+  - Historical defect data for training
+implementation:
+  estimated_hours: 120
+  technologies:
+    - Computer Vision
+    - TensorFlow/PyTorch
+    - Edge Computing
+    - Industrial cameras
+  integration_points:
+    - Quality Management System (QMS)
+    - Production line controllers
+    - ERP system
+benefits:
+  - 95% defect detection accuracy
+  - 80% reduction in manual inspection time
+  - Consistent quality standards
+  - Real-time defect classification
+metrics:
+  - Defect detection rate
+  - False positive rate
+  - Inspection throughput
+  - Cost savings from reduced returns
+tags:
+  - AI
+  - computer_vision
+  - quality_control
+  - automation
+status: active
+created_date: 2024-03-20
+updated_date: 2024-12-15

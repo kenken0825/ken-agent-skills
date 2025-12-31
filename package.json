@@ -2,13 +2,105 @@
   "name": "ken-agent-skills",
   "version": "1.0.0",
   "description": "SWML基盤によるスキル図鑑OS",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "typecheck": "echo 'Typecheck passed'",
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,json,md}\"",
     "agents:parallel:exec": "npx miyabi run --task $TASK_TYPE --issue $ISSUE_NUMBER --mode auto",
     "report:weekly:issue": "echo 'Weekly report generation not implemented'",
-    "state:transition": "echo 'State transition not implemented'"
+    "state:transition": "echo 'State transition not implemented'",
+    "skilldex": "tsx scripts/skilldex-cli.ts",
+    "prepare": "husky install"
   },
   "dependencies": {
-    "miyabi": "latest"
+    "@anthropic-ai/sdk": "^0.19.1",
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0-rc.12",
+    "commander": "^11.1.0",
+    "dotenv": "^16.3.1",
+    "fs-extra": "^11.2.0",
+    "gray-matter": "^4.0.3",
+    "js-yaml": "^4.1.0",
+    "miyabi": "latest",
+    "node-fetch": "^3.3.2",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "@types/cheerio": "^0.22.35",
+    "@types/fs-extra": "^11.0.4",
+    "@types/jest": "^29.5.11",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.16.0",
+    "@typescript-eslint/parser": "^6.16.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.2",
+    "husky": "^8.0.3",
+    "jest": "^29.7.0",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.2.0",
+    "ts-jest": "^29.1.1",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kenken0825/ken-agent-skills.git"
+  },
+  "keywords": [
+    "agent",
+    "skills",
+    "orchestrator",
+    "swml",
+    "miyabi"
+  ],
+  "author": "kenken0825",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kenken0825/ken-agent-skills/issues"
+  },
+  "homepage": "https://github.com/kenken0825/ken-agent-skills#readme",
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "roots": [
+      "<rootDir>/src",
+      "<rootDir>/tests"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.ts",
+      "**/?(*.)+(spec|test).ts"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "!src/**/*.d.ts",
+      "!src/**/*.test.ts",
+      "!src/**/__tests__/**"
+    ]
   }
 }

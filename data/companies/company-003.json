@@ -1,0 +1,72 @@
+{
+  "id": "company-003",
+  "name": "株式会社グリーンマート",
+  "industry": "小売業",
+  "size": "medium",
+  "employeeCount": 320,
+  "founded": "1998-03-20",
+  "location": {
+    "prefecture": "大阪府",
+    "city": "大阪市"
+  },
+  "businessOverview": "関西地区に15店舗を展開する中堅スーパーマーケットチェーン。地域密着型の品揃えと、新鮮な地場産品の取り扱いが強み。",
+  "challenges": [
+    {
+      "category": "在庫管理",
+      "description": "店舗間の在庫情報が連携されておらず、欠品や過剰在庫が発生",
+      "priority": "critical",
+      "impact": "売上機会損失と廃棄ロス"
+    },
+    {
+      "category": "顧客分析",
+      "description": "POSデータはあるが、顧客の購買行動分析ができていない",
+      "priority": "high",
+      "impact": "マーケティング施策の効果不明"
+    },
+    {
+      "category": "シフト管理",
+      "description": "各店舗でExcelでシフト作成しており、人員配置の最適化ができていない",
+      "priority": "medium",
+      "impact": "人件費の増加"
+    }
+  ],
+  "currentSystems": [
+    {
+      "type": "POSシステム",
+      "tool": "東芝テックPOS",
+      "satisfaction": 4
+    },
+    {
+      "type": "在庫管理",
+      "tool": "各店舗独自のExcel",
+      "satisfaction": 2
+    },
+    {
+      "type": "勤怠管理",
+      "tool": "キングオブタイム",
+      "satisfaction": 3
+    },
+    {
+      "type": "会計",
+      "tool": "SAP Business One",
+      "satisfaction": 4
+    }
+  ],
+  "budget": {
+    "annual": "1億2000万円",
+    "itInvestment": "8%"
+  },
+  "goals": [
+    "廃棄ロスを30%削減",
+    "顧客単価を10%向上",
+    "人件費率を2%削減",
+    "オンラインスーパー事業の立ち上げ"
+  ],
+  "contactPerson": {
+    "name": "鈴木次郎",
+    "position": "経営企画部長",
+    "email": "suzuki@greenmart.jp",
+    "phone": "06-7890-1234"
+  },
+  "lastUpdated": "2024-12-15"
+}

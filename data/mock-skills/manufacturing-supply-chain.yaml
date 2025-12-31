@@ -1,0 +1,43 @@
+id: mfg-supply-011
+name: Supply Chain Visibility Platform
+description: End-to-end supply chain tracking with real-time visibility and disruption alerts
+industry: manufacturing
+category: supply_chain
+evolution_level: 2
+complexity: medium
+prerequisites:
+  - Supplier data integration
+  - Transportation tracking APIs
+  - Warehouse management systems
+  - ERP integration
+implementation:
+  estimated_hours: 50
+  technologies:
+    - GPS/RFID tracking
+    - Real-time dashboards
+    - Event streaming
+    - API integrations
+    - Mobile applications
+  integration_points:
+    - Supplier portals
+    - Transportation management systems
+    - Warehouse management systems
+    - ERP systems
+benefits:
+  - Real-time shipment tracking
+  - Proactive disruption management
+  - Reduced lead time variability
+  - Improved supplier collaboration
+metrics:
+  - On-time delivery rate
+  - Supply chain visibility percentage
+  - Lead time reduction
+  - Disruption response time
+tags:
+  - supply_chain
+  - tracking
+  - visibility
+  - logistics
+status: active
+created_date: 2024-07-10
+updated_date: 2024-12-29

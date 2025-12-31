@@ -1,0 +1,43 @@
+id: it-sec-010
+name: Automated Security Compliance Monitoring
+description: Continuous security compliance checking and automated remediation for IT infrastructure
+industry: IT
+category: security
+evolution_level: 3
+complexity: high
+prerequisites:
+  - Access to all IT systems
+  - Compliance framework definitions
+  - Security scanning tools
+  - Remediation scripts repository
+implementation:
+  estimated_hours: 85
+  technologies:
+    - Security scanning tools
+    - Compliance frameworks (NIST, ISO)
+    - Automation scripts
+    - SIEM integration
+    - Dashboard tools
+  integration_points:
+    - SIEM systems
+    - Configuration management databases
+    - Ticketing systems
+    - Cloud platforms (AWS, Azure, GCP)
+benefits:
+  - 90% reduction in compliance audit preparation time
+  - Continuous compliance monitoring
+  - Automated vulnerability remediation
+  - Real-time compliance dashboards
+metrics:
+  - Compliance score percentage
+  - Time to remediation
+  - Number of violations detected
+  - Audit preparation time
+tags:
+  - security
+  - compliance
+  - automation
+  - monitoring
+status: active
+created_date: 2024-04-15
+updated_date: 2024-12-30

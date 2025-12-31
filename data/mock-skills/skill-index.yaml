@@ -1,0 +1,86 @@
+skills_index:
+  total_count: 12
+  by_industry:
+    manufacturing:
+      count: 4
+      skills:
+        - id: mfg-prod-001
+          name: Production Line Monitoring
+          evolution_level: 2
+        - id: mfg-qual-002
+          name: AI-Powered Quality Inspection
+          evolution_level: 4
+        - id: mfg-maint-007
+          name: Predictive Maintenance System
+          evolution_level: 3
+        - id: mfg-supply-011
+          name: Supply Chain Visibility Platform
+          evolution_level: 2
+    IT:
+      count: 4
+      skills:
+        - id: it-fin-003
+          name: Invoice Processing Automation
+          evolution_level: 3
+        - id: it-rep-004
+          name: Automated Monthly Report Generation
+          evolution_level: 2
+        - id: it-help-008
+          name: AI-Powered Help Desk Automation
+          evolution_level: 3
+        - id: it-sec-010
+          name: Automated Security Compliance Monitoring
+          evolution_level: 3
+    retail:
+      count: 4
+      skills:
+        - id: ret-inv-005
+          name: Smart Inventory Management System
+          evolution_level: 3
+        - id: ret-cust-006
+          name: Customer Behavior Analytics Platform
+          evolution_level: 4
+        - id: ret-price-009
+          name: Dynamic Price Optimization Engine
+          evolution_level: 4
+        - id: ret-return-012
+          name: Automated Returns Processing System
+          evolution_level: 2
+  by_evolution_level:
+    level_1:
+      count: 0
+      skills: []
+    level_2:
+      count: 4
+      skills:
+        - mfg-prod-001
+        - it-rep-004
+        - mfg-supply-011
+        - ret-return-012
+    level_3:
+      count: 5
+      skills:
+        - it-fin-003
+        - ret-inv-005
+        - mfg-maint-007
+        - it-help-008
+        - it-sec-010
+    level_4:
+      count: 3
+      skills:
+        - mfg-qual-002
+        - ret-cust-006
+        - ret-price-009
+  categories:
+    - production
+    - quality_control
+    - finance_automation
+    - reporting
+    - inventory
+    - customer_analytics
+    - maintenance
+    - service_desk
+    - pricing
+    - security
+    - supply_chain
+    - operations

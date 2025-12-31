@@ -1,0 +1,42 @@
+{
+  "companies": [
+    {
+      "id": "company-001",
+      "name": "株式会社テクノソリューション",
+      "industry": "IT",
+      "file": "companies/company-001.json"
+    },
+    {
+      "id": "company-002",
+      "name": "有限会社サクラ製造",
+      "industry": "製造業",
+      "file": "companies/company-002.json"
+    },
+    {
+      "id": "company-003",
+      "name": "株式会社グリーンマート",
+      "industry": "小売業",
+      "file": "companies/company-003.json"
+    }
+  ],
+  "consultationNotes": [
+    {
+      "id": "consultation-001",
+      "companyId": "company-001",
+      "date": "2024-12-20",
+      "file": "consultation-notes/consultation-001.md"
+    },
+    {
+      "id": "consultation-002",
+      "companyId": "company-002",
+      "date": "2024-12-18",
+      "file": "consultation-notes/consultation-002.md"
+    },
+    {
+      "id": "consultation-003",
+      "companyId": "company-003",
+      "date": "2024-12-22",
+      "file": "consultation-notes/consultation-003.md"
+    }
+  ]
+}
