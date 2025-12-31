@@ -1,0 +1,39 @@
+Miyabi Autonomous Agent SDK
+Copyright 2025 Shunsuke Hayashi
+
+This project is part of the Codex CLI fork:
+- Fork Repository: https://github.com/ShunsukeHayashi/codex
+- Original Repository: https://github.com/openai/codex (Apache License 2.0, Copyright 2025 OpenAI)
+
+---
+
+DEPENDENCIES AND ATTRIBUTIONS
+
+This project uses the following third-party libraries:
+
+1. Anthropic SDK (@anthropic-ai/sdk)
+   - License: MIT
+   - Copyright: Anthropic
+   - URL: https://github.com/anthropics/anthropic-sdk-typescript
+
+2. Octokit REST API (@octokit/rest)
+   - License: MIT
+   - Copyright: GitHub
+   - URL: https://github.com/octokit/rest.js
+
+3. Claude Code CLI (codex)
+   - License: Apache License 2.0
+   - Copyright: 2025 OpenAI
+   - URL: https://github.com/openai/codex
+   - Used for local execution mode via ClaudeCodeClient
+
+---
+
+ADDITIONAL NOTES
+
+This SDK implements the 識学理論 (Shikigaku Theory) architecture for multi-agent coordination:
+- Original Framework: https://github.com/ShunsukeHayashi/Autonomous-Operations
+- Architecture Design: Shunsuke Hayashi
+- Theory Application: Organizational management principles applied to AI agent systems
+
+All components of this SDK are licensed under Apache License 2.0.

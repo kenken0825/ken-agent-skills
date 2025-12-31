@@ -1,0 +1,34 @@
+{
+  "mcpServers": {
+    "miyabi": {
+      "command": "node",
+      "args": [
+        "node_modules/miyabi/templates/mcp-servers/miyabi-integration.js"
+      ],
+      "disabled": false,
+      "description": "Miyabi CLI統合 - プロジェクト作成、Agent実行、自動化機能"
+    },
+    "github": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+      },
+      "disabled": false,
+      "description": "GitHub統合 - Issue/PR管理、Repository操作"
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "."
+      ],
+      "disabled": false,
+      "description": "ファイルシステムアクセス"
+    }
+  }
+}

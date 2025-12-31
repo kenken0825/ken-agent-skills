@@ -1,0 +1,189 @@
+# Type Labels
+- name: "🐛 type:bug"
+  color: "d73a4a"
+  description: "Something isn't working"
+
+- name: "✨ type:feature"
+  color: "a2eeef"
+  description: "New feature or request"
+
+- name: "📚 type:docs"
+  color: "0075ca"
+  description: "Documentation improvements"
+
+- name: "♻️ type:refactor"
+  color: "fbca04"
+  description: "Code refactoring"
+
+- name: "🧪 type:test"
+  color: "bfd4f2"
+  description: "Testing related"
+
+# Priority Labels
+- name: "📊 priority:P0-Critical"
+  color: "b60205"
+  description: "Critical priority - immediate action required"
+
+- name: "⚠️ priority:P1-High"
+  color: "d93f0b"
+  description: "High priority"
+
+- name: "📊 priority:P2-Medium"
+  color: "fbca04"
+  description: "Medium priority"
+
+- name: "📊 priority:P3-Low"
+  color: "0e8a16"
+  description: "Low priority"
+
+# State Labels
+- name: "📥 state:pending"
+  color: "ededed"
+  description: "Waiting to be picked up"
+
+- name: "🔍 state:analyzing"
+  color: "fef2c0"
+  description: "Being analyzed"
+
+- name: "🏗️ state:implementing"
+  color: "c2e0c6"
+  description: "Implementation in progress"
+
+- name: "👀 state:reviewing"
+  color: "d4c5f9"
+  description: "Under review"
+
+- name: "✅ state:done"
+  color: "0e8a16"
+  description: "Completed"
+
+- name: "🚫 state:blocked"
+  color: "b60205"
+  description: "Blocked by dependencies"
+
+- name: "⏸️ state:paused"
+  color: "cccccc"
+  description: "Temporarily paused"
+
+# Phase Labels
+- name: "🎯 phase:planning"
+  color: "fef2c0"
+  description: "Planning phase"
+
+- name: "🎯 phase:design"
+  color: "bfdadc"
+  description: "Design phase"
+
+- name: "🎯 phase:development"
+  color: "c2e0c6"
+  description: "Development phase"
+
+- name: "🎯 phase:review"
+  color: "d4c5f9"
+  description: "Review phase"
+
+- name: "🎯 phase:deployment"
+  color: "0e8a16"
+  description: "Deployment phase"
+
+# Agent Labels
+- name: "🤖 agent:coordinator"
+  color: "e99695"
+  description: "Coordinator Agent"
+
+- name: "🤖 agent:codegen"
+  color: "c5def5"
+  description: "Code Generation Agent"
+
+- name: "🤖 agent:review"
+  color: "bfd4f2"
+  description: "Review Agent"
+
+- name: "🤖 agent:issue"
+  color: "d4c5f9"
+  description: "Issue Agent"
+
+- name: "🤖 agent:pr"
+  color: "f9d0c4"
+  description: "PR Agent"
+
+- name: "🤖 agent:deploy"
+  color: "c2e0c6"
+  description: "Deployment Agent"
+
+# Special Labels
+- name: "🔒 special:security"
+  color: "b60205"
+  description: "Security related"
+
+- name: "⚡ special:performance"
+  color: "fbca04"
+  description: "Performance improvements"
+
+- name: "🌐 special:i18n"
+  color: "0075ca"
+  description: "Internationalization"
+
+- name: "♿ special:accessibility"
+  color: "0e8a16"
+  description: "Accessibility improvements"
+
+- name: "👋 good-first-issue"
+  color: "7057ff"
+  description: "Good for newcomers"
+
+- name: "❓ question"
+  color: "d876e3"
+  description: "Further information is requested"
+
+- name: "💬 discussion"
+  color: "cc317c"
+  description: "Needs discussion"
+
+- name: "🎉 enhancement"
+  color: "84b6eb"
+  description: "Enhancement to existing feature"
+
+- name: "🐞 needs-reproduction"
+  color: "ffa8c5"
+  description: "Bug needs reproduction steps"
+
+- name: "📝 needs-documentation"
+  color: "c5def5"
+  description: "Needs documentation"
+
+- name: "🔧 needs-fix"
+  color: "d93f0b"
+  description: "Needs fixing"
+
+- name: "✨ needs-polish"
+  color: "fbca04"
+  description: "Needs polish and refinement"
+
+- name: "🎨 design"
+  color: "bfdadc"
+  description: "Design related"
+
+- name: "🔌 api"
+  color: "0e8a16"
+  description: "API related"
+
+- name: "💾 database"
+  color: "006b75"
+  description: "Database related"
+
+- name: "🔐 auth"
+  color: "b60205"
+  description: "Authentication/Authorization"
+
+- name: "📦 dependencies"
+  color: "0366d6"
+  description: "Dependencies update"
+
+- name: "🚀 deployment"
+  color: "0e8a16"
+  description: "Deployment related"
+
+- name: "🔥 hotfix"
+  color: "d73a4a"
+  description: "Urgent hotfix needed"
