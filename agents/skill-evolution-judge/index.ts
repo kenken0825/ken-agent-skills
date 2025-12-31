@@ -10,7 +10,7 @@ import {
   EvolutionHistory,
   EvolutionAssessment 
 } from './models/types';
-import { EvolutionEvaluator } from './evaluators/evolution-evaluator';
+import { evolutionEvaluator } from './evaluators/evolution-evaluator';
 import { EvolutionTracker } from './trackers/evolution-tracker';
 
 export interface SkillEvolutionJudgeConfig {
@@ -45,11 +45,9 @@ export interface SkillEvolutionJudgeOutput {
 }
 
 export class SkillEvolutionJudgeAgent {
-  private evaluator: EvolutionEvaluator;
   private tracker: EvolutionTracker;
 
   constructor(private config: SkillEvolutionJudgeConfig = {}) {
-    this.evaluator = new EvolutionEvaluator(config);
     this.tracker = new EvolutionTracker();
   }
 
@@ -58,13 +56,13 @@ export class SkillEvolutionJudgeAgent {
    */
   async execute(input: SkillEvolutionJudgeInput): Promise<SkillEvolutionJudgeOutput> {
     // 現在のレベルを評価
-    const currentLevel = await this.evaluator.evaluate(input.skill, input.evidence);
+    const currentLevel = await evolutionEvaluator.evaluate(input.skill, input.evidence);
     
     // レベルの詳細情報を取得
     const levelDetails = this.getLevelDetails(currentLevel);
     
     // 進化の評価
-    const assessment = this.assessEvolution(input.skill, input.evidence, currentLevel);
+    const assessment = await evolutionEvaluator.assessEvolution(input.skill, input.evidence);
     
     // 次レベルの進化条件を取得
     const nextLevelCriteria = this.getNextLevelCriteria(currentLevel);
@@ -84,8 +82,8 @@ export class SkillEvolutionJudgeAgent {
       await this.tracker.record({
         skillId: input.skill.id!,
         timestamp: new Date(),
-        level: currentLevel.level,
-        evidence: input.evidence
+        evidence: input.evidence,
+        trigger: 'Manual evaluation'
       });
     }
     
@@ -113,65 +111,7 @@ export class SkillEvolutionJudgeAgent {
     };
   }
 
-  /**
-   * 進化の評価
-   */
-  private assessEvolution(
-    skill: Skill,
-    evidence: any,
-    currentLevel: EvolutionLevel
-  ): EvolutionAssessment {
-    const readinessScore = this.calculateReadinessScore(evidence, currentLevel);
-    
-    return {
-      readyForNextLevel: readinessScore >= 0.8,
-      readinessScore,
-      strengths: this.identifyStrengths(evidence),
-      gaps: this.identifyGaps(evidence, currentLevel),
-      progressMetrics: {
-        implementationCount: evidence.implementations,
-        industryDiversity: evidence.industries.length,
-        roleDiversity: evidence.roles.length,
-        successRate: evidence.successRate || 0
-      }
-    };
-  }
 
-  /**
-   * 進化準備度スコアの計算
-   */
-  private calculateReadinessScore(evidence: any, currentLevel: EvolutionLevel): number {
-    let score = 0;
-    
-    // レベル別の基準に基づいてスコア計算
-    switch (currentLevel.level) {
-      case 1: // 個別最適
-        if (evidence.implementations >= 2) score += 0.3;
-        if (evidence.successRate >= 0.8) score += 0.3;
-        if (evidence.industries.length >= 1) score += 0.4;
-        break;
-      case 2: // 再現性確認
-        if (evidence.implementations >= 5) score += 0.25;
-        if (evidence.industries.length >= 2) score += 0.25;
-        if (evidence.successRate >= 0.85) score += 0.25;
-        if (evidence.roles.length >= 2) score += 0.25;
-        break;
-      case 3: // 構造抽出
-        if (evidence.implementations >= 10) score += 0.2;
-        if (evidence.industries.length >= 3) score += 0.2;
-        if (evidence.roles.length >= 3) score += 0.2;
-        if (evidence.successRate >= 0.9) score += 0.2;
-        // 異業種での成功が必要
-        if (this.hasCreossIndustrySuccess(evidence)) score += 0.2;
-        break;
-      case 4: // 汎用スキル
-        // レベル4は最高レベルなので、準備度は常に0
-        score = 0;
-        break;
-    }
-    
-    return Math.min(1.0, score);
-  }
 
   /**
    * 次レベルの進化条件を取得
@@ -271,49 +211,8 @@ export class SkillEvolutionJudgeAgent {
     return filled.repeat(level) + empty.repeat(bars - level);
   }
 
-  /**
-   * 強みの特定
-   */
-  private identifyStrengths(evidence: any): string[] {
-    const strengths: string[] = [];
-    
-    if (evidence.successRate >= 0.9) {
-      strengths.push('高い成功率（90%以上）');
-    }
-    if (evidence.implementations >= 5) {
-      strengths.push('豊富な実装実績');
-    }
-    if (evidence.industries.length >= 3) {
-      strengths.push('複数業界での実績');
-    }
-    
-    return strengths;
-  }
 
-  /**
-   * ギャップの特定
-   */
-  private identifyGaps(evidence: any, currentLevel: EvolutionLevel): string[] {
-    const nextCriteria = this.getNextLevelCriteria(currentLevel);
-    const gaps: string[] = [];
-    
-    if (evidence.implementations < nextCriteria.metrics.minImplementations) {
-      gaps.push(`実装数が不足（現在: ${evidence.implementations}、必要: ${nextCriteria.metrics.minImplementations}）`);
-    }
-    if (evidence.industries.length < nextCriteria.metrics.minIndustries) {
-      gaps.push(`業界展開が不足（現在: ${evidence.industries.length}、必要: ${nextCriteria.metrics.minIndustries}）`);
-    }
-    
-    return gaps;
-  }
 
-  /**
-   * 異業種での成功判定
-   */
-  private hasCreossIndustrySuccess(evidence: any): boolean {
-    // 簡易的な判定（実際はより詳細な分析が必要）
-    return evidence.industries.length >= 3 && evidence.successRate >= 0.8;
-  }
 
   /**
    * 推奨事項の生成

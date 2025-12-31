@@ -127,6 +127,38 @@ export interface GitHubPackagerConfig {
   debug?: boolean;
 }
 
+// 追加の型定義
+export interface SkillMetadata {
+  version: string;
+  author?: string;
+  license?: string;
+  repository?: string;
+  homepage?: string;
+  bugs?: string;
+  keywords?: string[];
+  dependencies?: Record<string, string>;
+  changelog?: Array<{
+    version: string;
+    date: string;
+    changes: string[];
+  }>;
+}
+
+export interface PackageOptions {
+  includeChangelog?: boolean;
+  includeExamples?: boolean;
+  includeDocs?: boolean;
+  includeScripts?: boolean;
+  includeTests?: boolean;
+  language?: 'ja' | 'en';
+}
+
+export interface SkillPackage {
+  skill: Skill;
+  metadata: SkillMetadata;
+  structure: PackageStructure;
+}
+
 // Input/Output型のエクスポート
 export interface GitHubPackagerInput {
   skill: Skill;

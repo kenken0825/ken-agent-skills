@@ -148,6 +148,7 @@ export class GitHubPackagerAgent {
     files.push('skill.yaml');
     
     // README.md生成
+    // ReadmeGeneratorはPackageOptionsを期待するので、optionsを渡す
     const readmeContent = await this.readmeGenerator.generate(skill, options);
     const readmePath = path.join(packagePath, 'README.md');
     await fs.writeFile(readmePath, readmeContent, 'utf8');

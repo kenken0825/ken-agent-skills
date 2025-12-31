@@ -11,7 +11,7 @@ import {
   RecommendationContext 
 } from './models/types';
 import { SkillMatcher } from './matchers/skill-matcher';
-import { SkillScorer } from './scorers/skill-scorer';
+import { SkillScorer } from './scorers';
 import { SkillRepository } from './repository/skill-repository';
 
 export interface SkillRecommenderConfig {
