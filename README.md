@@ -8,20 +8,21 @@ SWML（Skill-Worked Machine Learning）基盤による自律型スキル進化�
 
 ### 主な特徴
 
+- **Skilldex Orchestrator**: 5つの自律エージェントによる統合スキル推薦システム
+- **スキル進化システム**: Pokemon風のレベル1-4進化メカニズム
+- **CLIツール**: コマンドラインからの簡単な実行
 - **自律エージェント実行**: GitHub Actionsによる自動実装
 - **イシュードリブン開発**: Issueをトリガーとした自動開発フロー
-- **Miyabi統合**: 自律型開発フレームワーク（v1.0.0）
-- **スキル進化システム**: Pokemon風のレベル1-4進化メカニズム
 
 ## 🏗️ アーキテクチャ
 
-### エージェント構成（Skilldex Orchestrator）
+### Skilldex Orchestrator - 5つの自律エージェント
 
-1. **Win Point Hunter Agent** - 業務価値の発見
-2. **Pain Abstractor Agent** - 課題の抽象化
-3. **Skill Recommender Agent** - スキル提案
-4. **Feature Creator Agent** - 機能実装
-5. **Skill Forger Agent** - スキル生成
+1. **Win Point Hunter Agent** - 企業情報と勝ちパターンの発見
+2. **Pain Abstractor Agent** - 課題の抽象化と業界・職種分類
+3. **Skill Recommender Agent** - スキル提案とスコアリング
+4. **Skill Evolution Judge Agent** - スキル進化レベル評価
+5. **GitHub Packager Agent** - GitHubパッケージ生成
 
 詳細仕様: [Docs/skilldex-orchestrator-spec.md](Docs/skilldex-orchestrator-spec.md)
 
@@ -30,28 +31,36 @@ SWML（Skill-Worked Machine Learning）基盤による自律型スキル進化�
 ```
 ken_AgentSkills/
 ├── .github/
-│   └── workflows/
-│       └── autonomous-agent.yml    # 自律エージェント実行ワークフロー
-├── skills/                         # スキルカテゴリ
-│   ├── document/                   # 文書作成・管理系
-│   ├── data-analysis/              # データ分析・可視化系
-│   ├── business/                   # ビジネス業務支援系
-│   └── development/                # 開発・技術系
-├── professional-skills/            # 職業別特化スキル
-├── client-skills-pool/             # クライアント用カスタムスキル
-├── Docs/                          # ドキュメント
-├── scripts/                       # ユーティリティスクリプト
-└── hooks/                         # 通知フック
+│   └── workflows/              # GitHub Actionsワークフロー
+├── agents/                     # 5つの自律エージェント
+│   ├── win-point-hunter/       # URL/ヒアリング解析
+│   ├── pain-abstractor/        # ペインパターン抽出
+│   ├── skill-recommender/      # スキル推薦エンジン
+│   ├── skill-evolution-judge/  # 進化レベル判定
+│   └── github-packager/        # パッケージ生成
+├── orchestrator/               # オーケストレーターコア
+├── data/                       # サンプルデータ
+│   ├── mock-skills/           # 12個のサンプルスキル
+│   ├── companies/             # サンプル企業データ
+│   └── consultation-notes/    # サンプル相談メモ
+├── skills/                     # スキルカテゴリ
+├── scripts/                    # CLIツール
+│   └── skilldex-cli.ts        # Skilldex CLIツール
+├── tests/                      # テストスイート
+│   └── e2e/                   # 統合テスト
+└── Docs/                       # ドキュメント
+    ├── usage.md               # 使用方法ガイド
+    └── api-reference.md       # APIリファレンス
 ```
 
 ## 🔧 セットアップ
 
 ### 必要な環境
 
-- Node.js 20+
-- npm
-- GitHub CLI (`gh`)
-- Miyabi（自動インストール）
+- Node.js 18+ (推奨: 20+)
+- npm 9+
+- GitHub CLI (`gh`) - 任意
+- TypeScript 5.3+
 
 ### インストール
 
@@ -63,84 +72,130 @@ cd ken-agent-skills
 # 依存関係のインストール
 npm install
 
-# 環境変数の設定
-echo "GITHUB_TOKEN=your_github_token" > .env
+# 環境変数の設定（任意）
+echo "ANTHROPIC_API_KEY=your_api_key" > .env
+echo "GITHUB_TOKEN=your_github_token" >> .env
 ```
 
-## 🤖 自律エージェント実行
+## 🚀 クイックスタート
+
+### 1. URL分析によるスキル推薦
+
+```bash
+# 企業のWebサイトを分析してスキルを推薦
+npm run skilldex analyze -u https://example.com
+
+# 出力形式を指定（markdown/json/yaml）
+npm run skilldex analyze -u https://example.com -o json
+```
+
+### 2. ヒアリングメモからのスキル発見
+
+```bash
+# コンサルテーションメモを分析
+npm run skilldex consult -f consultation.md
+
+# サンプルデータで試す
+npm run skilldex consult -f data/consultation-notes/consultation-001.md
+```
+
+### 3. ハイブリッド分析（URL + ヒアリングメモ）
+
+```bash
+# 両方の情報源から総合的に分析
+npm run skilldex hybrid -u https://example.com -f notes.md
+```
+
+## 📚 Skilldex CLIコマンド
+
+### 基本コマンド
+
+| コマンド | 説明 | 使用例 |
+|---------|------|--------|
+| `analyze` | URL分析モード | `npm run skilldex analyze -u <url>` |
+| `consult` | ヒアリングメモ分析 | `npm run skilldex consult -f <file>` |
+| `hybrid` | ハイブリッド分析 | `npm run skilldex hybrid -u <url> -f <file>` |
+
+### クイックコマンド（開発者向け）
+
+| コマンド | 説明 | 使用例 |
+|---------|------|--------|
+| `intake` | 企業プロファイル作成 | `npm run skilldex intake -u <url>` |
+| `discover` | ペインパターンからスキル発見 | `npm run skilldex discover -f <file>` |
+| `rank` | スキルのスコアリング・ランキング | `npm run skilldex rank -s <skills.json>` |
+| `evolve` | スキル進化レベル評価 | `npm run skilldex evolve -s <skill.json>` |
+| `package` | GitHubパッケージ生成 | `npm run skilldex package -s <skill.json> -o <dir>` |
+
+## 🎯 スキル進化システム
+
+スキルは実装実績に基づいて4段階に進化します：
+
+| レベル | 名称 | 条件 | 説明 |
+|--------|------|------|------|
+| **Lv1** | 個別最適 | 1実装, 1業種 | 特定の現場で「助かった」が発生 |
+| **Lv2** | 再現性確認 | 3実装, 同業種 | 同業種で再現し「業界あるある」へ |
+| **Lv3** | 構造抽出 | 5実装, 3業種 | 異業種でも同職種で成立 |
+| **Lv4** | 汎用スキル | 10実装, 5業種 | 文脈フリーで使える"道具"へ |
+
+## 🤖 GitHub Actions統合
+
+### 自動実行トリガー
+
+1. **Issueラベル**: `agent:` プレフィックスのラベル（例: `agent:win-point-hunter`）
+2. **自動PR作成**: エージェントが実装を自動生成
+3. **ワークフロー**: `.github/workflows/` 配下で管理
 
 ### 手動実行
 
 ```bash
-# GitHub Actions経由
-gh workflow run autonomous-agent.yml \
-  -f issue_number=123 \
-  -f task_type=add-feature \
-  -f execution_mode=auto
-```
+# GitHub Actions経由での実行
+gh workflow run skilldex-agent.yml -f issue_number=123
 
-### 自動トリガー
-
-以下の条件で自動実行されます：
-
-1. **Issueラベル**: `🤖agent-execute`ラベルが付与された時
-2. **コメントコマンド**: `/agent` または `@miyabi` を含むコメント
-3. **手動ディスパッチ**: GitHub Actionsから手動実行
-
-## 📝 開発フロー
-
-1. **Issue作成**: 実装したい機能をIssueに記載
-2. **ラベル付与**: `🤖agent-execute`ラベルを追加
-3. **自動実装**: エージェントが自動的に実装を開始
-4. **PR作成**: 実装完了後、自動的にPRが作成される
-5. **レビュー&マージ**: 手動でレビューしてマージ
-
-## 🔔 通知システム
-
-ワークフロー開始・終了時に通知を受け取れます：
-
-```bash
 # 通知システムの起動
 npm run watch:issue -- --issue 5
 ```
 
-通知内容：
-- 音声通知（macOS）
-- デスクトップ通知
-- サウンド効果（開始: Glass、成功: Hero、失敗: Basso）
+## 📊 現在の機能
 
-## 📊 利用可能なスクリプト
+### ✅ 実装済み
+- **Skilldex Orchestrator**: 5エージェント統合システム
+- **CLIツール**: コマンドライン実行環境
+- **スキル推薦エンジン**: 4指標によるスコアリング
+- **進化レベル評価**: Lv1-4の自動判定
+- **GitHubパッケージ生成**: SKILL.md, README.md等の自動生成
+- **E2E統合テスト**: 完全な動作保証
+- **包括的ドキュメント**: 使用方法とAPIリファレンス
 
-```bash
-# タイプチェック
-npm run typecheck
-
-# エージェント並列実行
-npm run agents:parallel:exec
-
-# レポート生成（開発中）
-npm run report:weekly:issue
-
-# 状態遷移（開発中）
-npm run state:transition
-```
-
-## 🎯 現在の機能
-
-- ✅ 自律エージェントワークフロー
-- ✅ Issue駆動の自動実装
-- ✅ 自動PR作成
-- ✅ 通知システム
-- ✅ Miyabi統合
-- 🚧 スキル進化システム（開発中）
-- 🚧 並列エージェント実行（開発中）
+### 🚧 開発中
+- **リアルタイムAPI連携**: Anthropic API統合
+- **Webインターフェース**: ブラウザベースのUI
+- **スキル進化の自動追跡**: 実装履歴の管理
 
 ## 🤝 貢献方法
 
-1. Issueを作成して機能提案
-2. `🤖agent-execute`ラベルを付けて自動実装
-3. 生成されたPRをレビュー
-4. フィードバックを提供
+1. **Issueを作成**: 機能提案や改善要望
+2. **PRを送る**: 実装やドキュメント改善
+3. **スキルを追加**: `/data/mock-skills/`に新しいスキル定義
+4. **テストを書く**: `/tests/`配下にテストケース追加
+
+## 📚 ドキュメント
+
+- [使用方法ガイド](Docs/usage.md) - インストールから実行まで
+- [APIリファレンス](docs/api-reference.md) - 開発者向けAPI仕様
+- [Skilldex仕様書](Docs/skilldex-orchestrator-spec.md) - システム設計詳細
+
+## 🧪 テスト実行
+
+```bash
+# 全テストの実行
+npm test
+
+# E2E統合テストのみ
+npm test tests/e2e/orchestrator.test.ts
+
+# カバレッジレポート付き
+npm run test:coverage
+```
 
 ## 📄 ライセンス
 
