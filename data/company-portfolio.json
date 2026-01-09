@@ -1,0 +1,71 @@
+{
+  "portfolio": {
+    "name": "スキル推薦プロジェクト 2024",
+    "companies": [
+      {
+        "id": "miyagawa-001",
+        "name": "宮川行政書士事務所",
+        "url": "https://miyagawa-gyousei.com/",
+        "industry": "専門サービス業",
+        "status": "分析完了・ヒアリング待ち",
+        "priority": "high",
+        "assignee": "担当者A",
+        "timeline": {
+          "analysis": "2024-01-01",
+          "hearing": "2024-01-15",
+          "proposal": "2024-01-20",
+          "decision": "2024-01-31"
+        },
+        "recommended_skills": [
+          "業務管理システム",
+          "文書生成システム",
+          "オンライン予約"
+        ]
+      },
+      {
+        "id": "company-002",
+        "name": "株式会社サンプル製造",
+        "url": "https://example2.com/",
+        "industry": "製造業",
+        "status": "分析待ち",
+        "priority": "medium",
+        "assignee": "担当者B",
+        "timeline": {
+          "analysis": "2024-01-05",
+          "hearing": "2024-01-20",
+          "proposal": "2024-01-25",
+          "decision": "2024-02-05"
+        }
+      },
+      {
+        "id": "company-003",
+        "name": "グリーンリテール株式会社",
+        "url": "https://example3.com/",
+        "industry": "小売業",
+        "status": "分析待ち",
+        "priority": "medium",
+        "assignee": "担当者A",
+        "timeline": {
+          "analysis": "2024-01-05",
+          "hearing": "2024-01-22",
+          "proposal": "2024-01-27",
+          "decision": "2024-02-07"
+        }
+      }
+    ],
+    "summary": {
+      "total_companies": 3,
+      "status_breakdown": {
+        "分析完了": 1,
+        "ヒアリング中": 0,
+        "提案中": 0,
+        "実装中": 0
+      },
+      "industry_breakdown": {
+        "専門サービス業": 1,
+        "製造業": 1,
+        "小売業": 1
+      }
+    }
+  }
+}

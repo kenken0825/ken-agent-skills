@@ -1,9 +1,10 @@
 #!/usr/bin/env node
-// Placeholder dashboard data generator
-console.log("Dashboard data generation not yet implemented");
-console.log("Generating placeholder data...");
+import { writeFileSync } from 'fs';
+import { join } from 'path';
 
-// Create placeholder data
+console.log("Generating dashboard data...");
+
+// Create dashboard data
 const data = {
   timestamp: new Date().toISOString(),
   metrics: {
@@ -13,5 +14,10 @@ const data = {
   }
 };
 
+// Write to docs directory
+const outputPath = join(process.cwd(), 'docs', 'dashboard-data.json');
+writeFileSync(outputPath, JSON.stringify(data, null, 2));
+
+console.log(`Dashboard data generated at: ${outputPath}`);
 console.log(JSON.stringify(data, null, 2));
 process.exit(0);
